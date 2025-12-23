@@ -3,7 +3,8 @@ import {
   getCart as getCartAPI,
   addToCart as addToCartAPI,
   updateCartItem as updateCartItemAPI,
-  removeFromCart as removeFromCartAPI
+  removeFromCart as removeFromCartAPI,
+  clearCart as clearCartAPI
 } from '../services/cartService';
 
 const CartContext = createContext();
@@ -44,13 +45,20 @@ export const CartProvider = ({ children }) => {
     setItems(res.items || []);
   };
 
+  // ✅ CLEAR CART
+  const clearCart = async () => {
+    await clearCartAPI();
+    setItems([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
         items,
         addToCart,
         updateCartItem,
-        removeFromCart // ✅ MUST BE EXPOSED HERE
+        removeFromCart, // ✅ MUST BE EXPOSED HERE
+        clearCart
       }}
     >
       {children}

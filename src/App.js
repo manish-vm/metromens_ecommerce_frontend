@@ -1,8 +1,5 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePage';
+import AdminHeroBannersPage from './pages/admin/AdminHeroBannersPage';
 import CategoryPage from './pages/CategoryPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
@@ -16,6 +13,8 @@ import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminProductEditPage from './pages/admin/AdminProductEditPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
+import AdminCouponsPage from './pages/admin/AdminCouponsPage';
+import AdminExclusiveBannersPage from './pages/admin/AdminExclusiveBannersPage';
 import PrivateRoute from './routes/PrivateRoute';
 import AdminRoute from './routes/AdminRoute';
 import UserDashboard from './pages/UserDashboard';
@@ -24,6 +23,9 @@ import PrivacyPolicy from './pages/PrivacyPolicyPage';
 import ContactPage from './pages/ContactPage';
 import TrackOrderPage from './pages/TrackOrderPage';
 import WalletPage from './pages/WalletPage';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -128,6 +130,30 @@ function App() {
             element={
               <AdminRoute>
                 <AdminUsersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/coupons"
+            element={
+              <AdminRoute>
+                <AdminCouponsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/exclusive-banners"
+            element={
+              <AdminRoute>
+                <AdminExclusiveBannersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/hero-banners"
+            element={
+              <AdminRoute>
+                <AdminHeroBannersPage />
               </AdminRoute>
             }
           />

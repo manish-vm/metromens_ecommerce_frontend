@@ -29,8 +29,8 @@ export const getMyOrders = async () => {
   return data;
 };
 
-export const getAllOrders = async () => {
-  const { data } = await api.get('/orders');
+export const getAllOrders = async (params = {}) => {
+  const { data } = await api.get('/orders', { params });
   return data;
 };
 
@@ -62,4 +62,18 @@ export const deleteOrder = async (id) => {
 export const getOrderByOrderId = async (orderId) => {
   const { data } = await api.get(`/orders/track/${orderId}`);
   return data;
+};
+
+export const downloadOrdersExcel = async (params = {}) => {
+  const response = await api.get('/orders/download', {
+    params,
+    responseType: 'blob'
+  });
+  const url = window.URL.createObjectURL(new Blob([response.data]));
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'orders.xlsx');
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
 };

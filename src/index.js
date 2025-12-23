@@ -13,7 +13,22 @@ import './css/home.css';
 import './css/product.css';
 import './css/cart.css';
 import './css/auth.css';
-import './css/admin.css';
+import './css/adminDashboard.css';
+import './css/adminOrders.css';
+import './css/adminProductEdit.css';
+import './css/checkout.css';
+import './css/ContactPage.css';
+import './css/exclusive.css';
+import './css/marque.css';
+import './css/orderSuccess.css';
+import './css/PrivacyPolicyPage.css';
+import './css/productdetails.css';
+import './css/rewards.css';
+import './css/TermsConditionsPage.css';
+import './css/toast.css';
+import './css/userDashboard.css';
+import './css/userOrders.css';
+import './css/wallet.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

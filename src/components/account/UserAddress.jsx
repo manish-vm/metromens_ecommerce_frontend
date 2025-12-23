@@ -407,14 +407,15 @@ const UserAddress = () => {
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>
-              <button
+              
+            </div>
+            <button
                 type="button"
                 className="user-cancel-btn"
                 onClick={handleCancel}
               >
                 Cancel
               </button>
-            </div>
           </form>
         </div>
       )}

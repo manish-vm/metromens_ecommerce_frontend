@@ -21,3 +21,8 @@ export const removeFromCart = async (productId, size, color) => {
   });
   return res.data;
 };
+
+export const clearCart = async () => {
+  const res = await api.delete('/cart/clear');
+  return res.data;
+};

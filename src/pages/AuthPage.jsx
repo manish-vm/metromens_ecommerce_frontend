@@ -114,7 +114,7 @@ const AuthPage = () => {
 
         {mode === 'login' ? (
           <>
-            <div className="auth-method-toggle">
+            {/* <div className="auth-method-toggle">
               <button
                 className={loginMethod === 'email' ? 'active' : ''}
                 onClick={() => setLoginMethod('email')}
@@ -127,7 +127,7 @@ const AuthPage = () => {
               >
                 Phone OTP
               </button>
-            </div>
+            </div> */}
 
             {loginMethod === 'email' && (
               <form onSubmit={handleEmailLogin} className="auth-form">
@@ -152,7 +152,7 @@ const AuthPage = () => {
                   />
                 </div>
                 {error && <div className="error-message">{error}</div>}
-                <button className="btn-primary wide" type="submit">
+                <button className="btn-auth wide" type="submit">
                   Login
                 </button>
               </form>
@@ -172,7 +172,7 @@ const AuthPage = () => {
                   <>
                     {error && <div className="error-message">{error}</div>}
                     <button
-                      className="btn-primary wide"
+                      className="btn-auth wide"
                       onClick={handleRequestOtp}
                     >
                       Request OTP
@@ -190,7 +190,7 @@ const AuthPage = () => {
                     </div>
                     {error && <div className="error-message">{error}</div>}
                     <button
-                      className="btn-primary wide"
+                      className="btn-auth wide"
                       onClick={handlePhoneLogin}
                     >
                       Verify & Login
@@ -248,7 +248,7 @@ const AuthPage = () => {
                 required
               />
             </div>
-            <button className="btn-primary wide" type="submit">
+            <button className="btn-auth wide" type="submit">
               Create Account
             </button>
           </form>

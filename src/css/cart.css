@@ -2,6 +2,7 @@
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
+  margin-top: 100px;
 }
 
 .cart-layout {
@@ -183,7 +184,7 @@
   display: inline-block;
   margin-top: 0.5rem;
   background: #000;
-  color: #fff;
+  color: #facc15;
   padding: 0.75rem 2.5rem;
   border-radius: 999px;
   border: none;
@@ -272,4 +273,16 @@
     padding: 0.8rem;
     font-size: 1rem;
   }
+}
+
+.btn-primary-checkout{
+  background-color: #000;
+  color: #facc15;
+  padding: 0.75rem 2.5rem;
+  border-radius: 5px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100%
 }

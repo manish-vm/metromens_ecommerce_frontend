@@ -1,12 +1,12 @@
 .user-dashboard {
   margin: 120px auto 40px;
-  max-width: 1200px;
   width: 95%;
   padding: 0 1rem;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 400px 1fr;
   /* Reduced sidebar width */
   gap: 2rem;
+  
 }
 
 .user-dashboard-loading {
@@ -345,6 +345,77 @@
   }
 }
 
+/* MOBILE HAMBURGER AND SIDEBAR OVERLAY */
+@media (max-width: 768px) {
+  .user-dashboard {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    cursor: pointer;
+  }
+
+  .user-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding: 1.2rem 1rem;
+    overflow-y: auto;
+  }
+
+  .user-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .hamburger-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    color: #333;
+  }
+
+  .user-main-header {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
+  /* Reset menu to vertical on mobile */
+  .user-menu {
+    flex-direction: column;
+    gap: 1rem;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+
+  .user-menu-item {
+    min-width: auto;
+    white-space: normal;
+    justify-content: flex-start;
+    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    height: 50px;
+  }
+}
+
 @media (max-width: 640px) {
   .user-main-body {
     padding: 1rem;
@@ -508,6 +579,18 @@
   background: #222;
 }
 
+.user-cancel-btn{
+   margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.7rem 1rem;
+  color: #ffd300;
+  background: black;
+  font-weight: 700;
+  cursor: pointer;
+
+}
 /* RESPONSIVE DESIGN */
 @media (max-width: 600px) {
   .address-item {
@@ -527,4 +610,38 @@
 .success-image{
   height: 250px;
   width: 250px;
+}
+
+.cancel-btn-link{
+  text-decoration: none;
+}
+@media (max-width: 480px){
+  .user-gender-group{
+    display: flex;
+    width: 100%;
+
+  }
+  .gender-pill{
+    width: 200px;
+    margin-left: 45px;
+  }
+  .user-dashboard{
+    width: 100%;
+  }
+  .hamburger-btn{
+    margin-top: -10px;
+  }
+  .user-main-header{
+    font-size: 1.5rem;
+  }
+  .user-form{
+    margin:0;
+    width: 100%;
+  }
+  .address-item-actions{
+    display: block;
+  }
+  .address-item-actions > .btn-link{
+    margin-right: 20px;
+  }
 }

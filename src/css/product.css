@@ -622,3 +622,16 @@
     transform: scale(1);
   }
 }
+
+@media (max-width: 480px){
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 1rem;
+  }
+
+  .wishlist-remove {
+    display: none
+  }
+}

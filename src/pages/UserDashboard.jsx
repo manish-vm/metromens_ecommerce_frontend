@@ -3,6 +3,7 @@ import AccountWishlist from '../components/account/AccountWishlist';
 import AccountOrders from '../components/account/AccountOrders';
 import WalletPage from './WalletPage';
 import UserAdress from '../components/account/UserAddress';
+import CouponsSection from '../components/account/CouponsSection';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, useLocation } from "react-router-dom";
 import { getMyProfile, updateMyProfile } from "../services/userService";
@@ -25,6 +26,9 @@ const UserDashboard = () => {
 
   // 🔹 which tab is open on the right side: 'profile' or 'address'
   const [activeTab, setActiveTab] = useState('profile');
+
+  // 🔹 mobile sidebar toggle
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Check for navigation state (e.g. redirect from Cart -> Orders)
   const location = window.location; // or useLocation from react-router
@@ -119,8 +123,16 @@ const UserDashboard = () => {
 
   return (
     <div className="user-dashboard">
+      {/* MOBILE OVERLAY */}
+      {mobileSidebarOpen && (
+        <div
+          className="mobile-overlay"
+          onClick={() => setMobileSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* LEFT SIDEBAR */}
-      <aside className="user-sidebar">
+      <aside className={`user-sidebar ${mobileSidebarOpen ? 'open' : ''}`}>
         <div className="user-card">
           <div className="user-avatar-circle">{initialLetter}</div>
           <div className="user-card-name">{profile.name}</div>
@@ -152,7 +164,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'profile' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('profile')}
+            onClick={() => {
+              setActiveTab('profile');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">👤</span>
             <span>My Profile</span>
@@ -163,7 +178,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'orders' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('orders')}
+            onClick={() => {
+              setActiveTab('orders');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">🧾</span>
             <span>My Orders</span>
@@ -174,7 +192,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'address' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('address')}
+            onClick={() => {
+              setActiveTab('address');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">📍</span>
             <span>My Address</span>
@@ -185,7 +206,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'wishlist' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('wishlist')}
+            onClick={() => {
+              setActiveTab('wishlist');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">❤️</span>
             <span>Wishlist</span>
@@ -196,7 +220,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'wallet' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('wallet')}
+            onClick={() => {
+              setActiveTab('wallet');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">💼</span>
             <span>Metro Wallet</span>
@@ -206,7 +233,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'coupons' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('coupons')}
+            onClick={() => {
+              setActiveTab('coupons');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">🎟️</span>
             <span>Coupons</span>
@@ -216,7 +246,10 @@ const UserDashboard = () => {
               'user-menu-item' + (activeTab === 'contact' ? ' active' : '')
             }
             type="button"
-            onClick={() => setActiveTab('contact')}
+            onClick={() => {
+              navigate('/contact');
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">📨</span>
             <span>Contact Us</span>
@@ -224,7 +257,10 @@ const UserDashboard = () => {
           <button
             className="user-menu-item logout"
             type="button"
-            onClick={handleLogout}
+            onClick={() => {
+              handleLogout();
+              setMobileSidebarOpen(false);
+            }}
           >
             <span className="user-menu-icon">🚪</span>
             <span>Logout</span>
@@ -235,6 +271,13 @@ const UserDashboard = () => {
       {/* RIGHT CONTENT */}
       <main className="user-main">
         <header className="user-main-header">
+          <button
+            className="hamburger-btn"
+            onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+            type="button"
+          >
+            ☰
+          </button>
           {activeTab === 'address'
             ? 'My Address'
             : activeTab === 'wishlist'
@@ -259,6 +302,8 @@ const UserDashboard = () => {
             <AccountOrders />
           ) : activeTab === 'wallet' ? (
             <WalletPage />
+          ) : activeTab === 'coupons' ? (
+            <CouponsSection />
           ) : activeTab === 'profile' ? (
 
             <form className="user-form" onSubmit={handleSave}>

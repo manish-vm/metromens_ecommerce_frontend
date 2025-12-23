@@ -292,7 +292,7 @@ const AdminProductEditPage = () => {
             <label>Product Images (External URLs)</label>
             <div
               style={{
-                display: 'flex',
+                display: 'block',
                 gap: '0.5rem',
                 marginBottom: '0.5rem'
               }}
@@ -303,7 +303,7 @@ const AdminProductEditPage = () => {
                 value={imageUrlInput}
                 onChange={(e) => setImageUrlInput(e.target.value)}
                 style={{ flex: 1 }}
-              />
+              /><br></br>
               <button className="btn-secondary" onClick={handleAddImageUrl}>
                 Add
               </button>

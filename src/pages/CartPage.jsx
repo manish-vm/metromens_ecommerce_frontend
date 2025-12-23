@@ -169,18 +169,23 @@ const CartPage = () => {
 
             <div className="summary-row">
               <span>Shipping</span>
-              <span>Free</span>
+              <span>{itemsPrice < 999 ? formatPrice(49) : 'Free' }</span>
+            </div>
+
+            <div className="summary-row">
+              <span>GST</span>
+              <span>{formatPrice(Math.round(itemsPrice * 0.05))}</span>
             </div>
 
             <hr />
 
             <div className="summary-row total">
-              <span>Total</span>
-              <span>{formatPrice(itemsPrice)}</span>
+              <span>Grand Total</span>
+              <span>{formatPrice(itemsPrice + (itemsPrice > 999 ? 0 : 49) + Math.round(itemsPrice * 0.05))}</span>
             </div>
 
             <button
-              className="btn-primary wide"
+              className="btn-primary-checkout"
               onClick={handlePlaceOrder}
             >
               Checkout

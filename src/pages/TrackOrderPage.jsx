@@ -86,7 +86,7 @@ const TrackOrderPage = () => {
             <div className="card order-summary">
               <h2>Order Overview</h2>
               <p><strong>Order ID:</strong> {tracking.orderId}</p>
-              <p><strong>Status:</strong> 
+              <p><strong>Status:</strong>
                 <span className={`status-badge ${tracking.status.toLowerCase()}`}>
                   {tracking.status}
                 </span>
@@ -99,6 +99,10 @@ const TrackOrderPage = () => {
               ) : (
                 <p><strong>Est. delivery by:</strong> {getEstimatedDeliveryDate(tracking).toLocaleDateString()}</p>
               )}
+              <p><strong>Items Price:</strong> ₹{tracking.itemsPrice}</p>
+              <p><strong>Shipping Price:</strong> ₹{tracking.shippingPrice}</p>
+              <p><strong>GST:</strong> ₹{tracking.taxPrice}</p>
+              <p><strong>Grand Total:</strong> ₹{tracking.totalPrice}</p>
             </div>
 
             {/* ITEMS */}

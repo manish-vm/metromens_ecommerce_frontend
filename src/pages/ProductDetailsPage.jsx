@@ -16,6 +16,7 @@ const ProductDetailsPage = () => {
   const [size, setSize] = useState('');
   const [color, setColor] = useState('');
   const [qty, setQty] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
     const load = async () => {
@@ -44,11 +45,27 @@ const ProductDetailsPage = () => {
     <div className="product-details-page">
       <div className="product-details-wrapper">
         <div className="product-gallery">
-          {product.images?.[0] ? (
-            <img src={product.images[0]} alt={product.name} />
-          ) : (
-            <div className="product-image placeholder large">Image</div>
+          {product.images?.length > 1 && (
+            <div className="image-thumbnails">
+              {product.images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${product.name} ${index + 1}`}
+                  className={`thumbnail ${index === selectedImageIndex ? 'active' : ''}`}
+                  onClick={() => setSelectedImageIndex(index)}
+                />
+              ))}
+            </div>
           )}
+          <div className="main-image">
+            
+            {product.images?.[selectedImageIndex] ? (
+              <img src={product.images[selectedImageIndex]} alt={product.name} />
+            ) : (
+              <div className="product-image placeholder large">Image</div>
+            )}
+          </div>
         </div>
 
         <div className="product-details">
@@ -109,7 +126,7 @@ const ProductDetailsPage = () => {
             </div>
           </div>
 
-          <button onClick={handleAddToCart} className="btn-primary wide">
+          <button onClick={handleAddToCart} className="btn-add-to-cart">
             Add to Cart
           </button>
         </div>

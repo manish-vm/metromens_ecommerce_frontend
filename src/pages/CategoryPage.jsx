@@ -18,7 +18,7 @@ const CategoryPage = () => {
         setCategory(cat || { name: slug });
         // ✅ FIXED: Pass slug, not ID, because backend expects category slug
         const prods = await getProducts({ category: slug });
-        setProducts(prods);
+        setProducts(Array.isArray(prods.products) ? prods.products : []);
       } catch (error) {
         console.error("Failed to load products", error);
       } finally {

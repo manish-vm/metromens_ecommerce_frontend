@@ -33,7 +33,7 @@ const ProductListPage = () => {
         if (searchQuery) params.search = searchQuery;
 
         const data = await getProducts(params);
-        setProducts(data || []);
+        setProducts(Array.isArray(data.products) ? data.products : []);
       } catch (error) {
         console.error('Error loading products:', error);
         setProducts([]);

@@ -26,19 +26,20 @@
 }
 
 /* BUTTON */
-.btn-primary {
+.btn-view-orders{
   display: inline-block;
   background: #000;
-  color: #fff;
+  color: #facc15;
   padding: 0.8rem 1.4rem;
   border-radius: 8px;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
   transition: 0.25s ease;
+  width: 100%;
 }
 
-.btn-primary:hover {
+.btn-view-orders:hover {
   background: #222;
 }
 
@@ -67,5 +68,31 @@
 
   .order-success-page p {
     font-size: 1rem;
+  }
+}
+
+.btn-download-invoice{
+  display: inline-block;
+  background: #1d7130;
+  color: #ffffff;
+  padding: 0.8rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.25s ease;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+}
+
+.btn-download-invoice:hover{
+  background-color: #125421;
+}
+@media (max-width: 480px) {
+  .btn-download-invoice {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
   }
 }

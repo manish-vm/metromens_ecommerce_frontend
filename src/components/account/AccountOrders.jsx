@@ -7,7 +7,9 @@ import {
   clearMyOrders
 } from '../../services/orderService';
 import '../../css/userOrders.css';
-// import '../../css/accountOrders.css';
+import jsPDF from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
+import QRCode from 'qrcode';
 
 const STATUS_STEPS = [
   { key: 'Placed', label: 'Order Placed' },
@@ -130,6 +132,135 @@ const AccountOrders = () => {
     }
   };
 
+  // ✅ Download invoice PDF
+  const downloadInvoice = async (order) => {
+    if (!order) return;
+
+    const doc = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    /* ---------------- HEADER ---------------- */
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('MetroMensWear', pageWidth - 15, 22, { align: 'right' });
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Order Invoice', pageWidth - 15, 28, { align: 'right' });
+    doc.text('metromenswear01@gmail.com', pageWidth - 15, 34, { align: 'right' });
+
+    doc.setDrawColor(220);
+    doc.line(15, 48, pageWidth - 15, 48);
+
+    /* ---------------- ORDER INFO ---------------- */
+    doc.setFontSize(10);
+    doc.text(`Invoice No: ${order.orderId || order._id}`, 15, 58);
+    doc.text(`Order Date: ${formatDate(order.createdAt)}`, 15, 64);
+    doc.text(`Status: ${order.status}`, 15, 70);
+
+    /* ---------------- SHIPPING ADDRESS ---------------- */
+    const address = order.shippingAddress || {};
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Shipping Address', 15, 82);
+
+    doc.setFont('helvetica', 'normal');
+    doc.text(
+      [
+        address.fullName,
+        address.addressLine1,
+        address.addressLine2,
+        `${address.city}, ${address.state} - ${address.pincode}`,
+        `Phone: ${address.mobile || address.phone}`
+      ].filter(Boolean),
+      15,
+      88
+    );
+
+    /* ---------------- QR CODE ---------------- */
+    
+    const qrText = `Order ID: ${order.orderId || order._id}`;
+    const qrDataUrl = await QRCode.toDataURL(qrText);
+
+    doc.addImage(qrDataUrl, 'PNG', pageWidth - 45, 82, 30, 30);
+
+    /* ---------------- ITEMS TABLE ---------------- */
+    const tableBody = (order.orderItems || []).map((item, i) => [
+      i + 1,
+      item.name,
+      item.qty,
+      `₹${item.price}`,
+      `₹${item.qty * item.price}`
+    ]);
+
+    autoTable(doc, {
+      startY: 125,
+      head: [['#', 'Item', 'Qty', 'Price', 'Total']],
+      body: tableBody,
+      theme: 'grid',
+      headStyles: {
+        fillColor: [15, 23, 42],
+        textColor: 255,
+        fontStyle: 'bold'
+      },
+      styles: {
+        fontSize: 10,
+        cellPadding: 6
+      },
+      columnStyles: {
+        0: { cellWidth: 10 },
+        2: { cellWidth: 20 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 30 }
+      }
+    });
+
+    /* ---------------- PRICE SUMMARY ---------------- */
+    const finalY = doc.lastAutoTable.finalY + 10;
+
+    autoTable(doc, {
+      startY: finalY,
+      body: [
+        ['Items Price', `₹${order.itemsPrice || 0}`],
+        ['Shipping', `₹${order.shippingPrice || 0}`],
+        ['GST', `₹${order.taxPrice || 0}`],
+        [
+          { content: 'Grand Total', styles: { fontStyle: 'bold' } },
+          { content: `₹${order.totalPrice}`, styles: { fontStyle: 'bold' } }
+        ]
+      ],
+      theme: 'plain',
+      styles: {
+        fontSize: 11,
+        cellPadding: 4
+      },
+      columnStyles: {
+        0: { halign: 'right' },
+        1: { halign: 'right' }
+      },
+      margin: { left: pageWidth - 90 }
+    });
+
+    /* ---------------- FOOTER ---------------- */
+    const footerY = doc.internal.pageSize.getHeight() - 20;
+
+    doc.setFontSize(9);
+    doc.setTextColor(120);
+    doc.text(
+      'Thank you for shopping with MetroMensWear !!!',
+      pageWidth / 2,
+      footerY,
+      { align: 'center' }
+    );
+    doc.text(
+      "This is a system-generated invoice.",
+      pageWidth / 2,
+      290,
+      { align: "center" }
+    );
+
+    doc.save(`Invoice_${order.orderId || order._id}.pdf`);
+  };
   if (loading) {
     return <div className="user-section-loading">Loading orders…</div>;
   }
@@ -198,7 +329,7 @@ const AccountOrders = () => {
                 <div className="order-id">
                   Order ID: {order.orderId || order._id}
                   {' '}
-                  <a
+                  {/* <a
                     href={`/track-order?orderId=${encodeURIComponent(
                       order.orderId || order._id
                     )}`}
@@ -206,14 +337,18 @@ const AccountOrders = () => {
                     style={{ marginLeft: 8 }}
                   >
                     Track
-                  </a>
+                  </a> */}
+                  <button onClick={() => downloadInvoice(order)} className="btn-order-invoice">
+                    Download Invoice
+                  </button>
                 </div>
+
                 <div className="order-date">
                   Placed on {formatDate(order.createdAt)}
                 </div>
               </div>
               <div className="order-summary-right">
-                <div className="order-total">₹{order.totalPrice}</div>
+                <div className="order-total">Grand Total: ₹{order.totalPrice}</div>
                 <div className="order-status-text">
                   {isCancelled ? 'Cancelled' : order.status}
                 </div>
@@ -296,7 +431,9 @@ const AccountOrders = () => {
                         )}
                       </div>
                     )}
+
                   </div>
+
                 );
               })}
             </div>
@@ -366,7 +503,7 @@ const AccountOrders = () => {
                   className="order-delete-btn"
                   onClick={() => handleDeleteOrder(order._id)}
                 >
-                  Delete Order
+                  Delete Record
                 </button>
               </div>
             </div>

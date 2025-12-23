@@ -8,6 +8,7 @@ const WalletPage = () => {
         <h1 className="wallet-title">Metro Wallet</h1>
         <div className="wallet-content">
           <div className="wallet-balance">
+            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/wallet-3d-icon-png-download-4323761.png" alt="Wallet" className="wallet-image" height=" 150px" width="150px" />
             <h2>Wallet Balance</h2>
             <h5> This Feature will be enabled soon 🚀</h5>
             <div className="balance-amount">₹0.00</div>

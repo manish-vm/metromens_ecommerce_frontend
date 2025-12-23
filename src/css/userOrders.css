@@ -481,3 +481,241 @@
 .no-order-btn:hover {
   background: #e0b020;
 }
+
+.order-history-delete-btn{
+  width: 150px;
+  border: none;
+  background-color: #e71616cd;
+  border: 1px solid red;
+  color: white;
+  font-size: 12px;
+  height: 30px;
+  font-weight: 600;
+  border-radius: 5px !important;
+}
+.order-history-delete-btn:hover{
+  background-color: red;
+  color: white;
+  border: none;
+  transform: scale(1.02);
+}
+.btn-order-invoice{
+  background: none;
+  border: 1px solid black;
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+/* ================================ */
+/* MOBILE RESPONSIVE STYLES */
+/* ================================ */
+
+@media (max-width: 768px) {
+  /* Wrapper */
+  .orders-list-wrapper {
+    gap: 1rem;
+  }
+
+  /* Order card */
+  .order-card {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Header */
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .order-id {
+    font-size: 0.85rem;
+  }
+
+  .order-date {
+    font-size: 0.75rem;
+  }
+
+  .order-summary-right {
+    text-align: left;
+    margin-top: 0.25rem;
+  }
+
+  .order-total {
+    font-size: 0.9rem;
+  }
+
+  .order-status-text {
+    font-size: 0.75rem;
+  }
+
+  /* Order items preview */
+  .order-items-preview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .order-item-main {
+    width: 100%;
+  }
+
+  .order-item-image-wrap {
+    width: 50px;
+    height: 50px;
+  }
+
+  .order-item-info {
+    font-size: 0.75rem;
+  }
+
+  .order-item-name {
+    font-size: 0.8rem;
+  }
+
+  .order-item-meta {
+    font-size: 0.7rem;
+  }
+
+  .order-item-qty {
+    font-size: 0.7rem;
+  }
+
+  .order-item-more {
+    font-size: 0.7rem;
+    align-self: flex-end;
+  }
+
+  /* Timeline / Stepper */
+  .order-tracker {
+    margin-top: 1rem;
+  }
+
+  .order-step {
+    flex: none;
+    width: 25%;
+  }
+
+  .step-circle {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .step-label {
+    font-size: 0.7rem;
+  }
+
+  .step-meta {
+    font-size: 0.65rem;
+  }
+
+  /* Footer */
+  .order-footer {
+    gap: 0.75rem;
+  }
+
+  .order-footer-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .order-delete-btn {
+    align-self: flex-start;
+  }
+
+  /* Cancel form */
+  .cancel-form {
+    padding: 0.5rem;
+  }
+
+  .cancel-textarea {
+    font-size: 0.75rem;
+  }
+
+  .cancel-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cancel-btn-light,
+  .cancel-btn-primary {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  /* Header with delete button */
+  .orders-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .order-history-delete-btn {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* No orders state */
+  .no-order-wrapper {
+    height: 500px;
+  }
+
+  .no-order-card {
+    width: 90%;
+    margin-top: 80px;
+    padding: 1.5rem 1rem;
+  }
+
+  .no-order-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .no-order-card h2 {
+    font-size: 18px;
+  }
+
+  .no-order-card p {
+    font-size: 13px;
+  }
+
+  .no-order-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  /* Invoice button */
+  .btn-order-invoice {
+    margin-left: 10px;
+    font-size: 11px;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media(max-width: 480px) {
+  .cancel-btn-link{
+    margin-left: 220px;
+  }
+  .btn-order-invoice{
+    margin-left: 200px;
+    margin-top: 10px;
+  }
+  .order-date{
+    margin-top: -20px;
+  }
+  .order-history-delete-btn{
+    width: 50%;
+    padding: 5px;
+   margin-left: 170px;
+   margin-top: -55px;
+  }
+  .order-delete-btn{
+     display: none;
+  }
+
+}
