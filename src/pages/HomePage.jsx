@@ -177,15 +177,17 @@ const allproducts=()=>{
       <center>
         
         <h2>BEST SELLERS</h2></center>
+        <div className="section-divider" >
         <ProductGridSection
         products={bestSellers}
-      />
+      /></div>
 
       <center>
         <h2>TRENDING</h2></center>
+        <div className="section-divider" >
         <ProductGridSection
         products={trending}
-      />
+      /></div>
 
       <center>
         <button className="explore-more-button" onClick={allproducts}>Explore More</button>
