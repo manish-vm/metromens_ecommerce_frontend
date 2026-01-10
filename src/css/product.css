@@ -626,7 +626,7 @@
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
     margin-left: -12px;
-    margin-right: 10px;
+    margin-right: 12px;
     gap: 1rem;
   }
   .product-card-inner{
