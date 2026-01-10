@@ -159,6 +159,7 @@ const allproducts=()=>{
           </button>
 
         </div>
+        <div className="section-divider" >
         {newArrivals.length > 0 ? (
           <div className="product-grid">
             {newArrivals.map((p) => (
@@ -171,7 +172,7 @@ const allproducts=()=>{
             <h3>No New Arrivals Found</h3>
             <p>Check back later for the latest additions!</p>
           </div>
-        )}
+        )}</div>
       </section>
       <center>
         
