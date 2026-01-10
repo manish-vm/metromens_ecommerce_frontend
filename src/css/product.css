@@ -625,12 +625,17 @@
 
 @media (max-width: 480px){
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
-    margin-left: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 2fr));
+    margin-left: -12px;
     margin-right: 10px;
     gap: 1rem;
   }
-
+  .product-card-inner{
+    width: 200px;
+  }
+  .product-image-wrapper{
+    height: 300px;
+  }
   .wishlist-remove {
     display: none
   }
