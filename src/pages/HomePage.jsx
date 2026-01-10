@@ -177,14 +177,14 @@ const allproducts=()=>{
       <center>
         
         <h2>BEST SELLERS</h2></center>
-        <div className="section-divider" >
+        <div className="section-divider-bestseller" >
         <ProductGridSection
         products={bestSellers}
       /></div>
 
       <center>
         <h2>TRENDING</h2></center>
-        <div className="section-divider" >
+        <div className="section-divider-bestseller" >
         <ProductGridSection
         products={trending}
       /></div>
