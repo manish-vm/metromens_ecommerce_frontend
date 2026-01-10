@@ -376,13 +376,12 @@
 
 .loading,
 .no-products {
-  margin: 150px;
+  
 }
 
 .coming-soon-box {
   width: 100%;
   padding: 60px 20px;
-  text-align: center;
   background: #f8f8f8;
   border-radius: 12px;
   margin-top: 10px;
@@ -625,7 +624,7 @@
 
 @media (max-width: 480px){
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
     margin-left: -12px;
     margin-right: 10px;
     gap: 1rem;
