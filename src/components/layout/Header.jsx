@@ -64,50 +64,31 @@ const Header = () => {
           </div>
           <div className="header-strip-auth">
             {user ? (
-              <>
+              user.isAdmin ? (
                 <>
-                  <div
-                    className="auth-dropdown-container"
-                    onMouseEnter={() => setAccountOpen(true)}
-                    onMouseLeave={() => setAccountOpen(false)}
-                    style={{ position: 'relative', display: 'inline-block' }}
+                  <button
+                    className="strip-link"
+                    onClick={() => navigate('/admin')}
                   >
-                    <button
-                      className="strip-link"
-                      onClick={() => navigate(user.isAdmin ? '/admin' : '/account')}
-                    >
-                      {user.isAdmin ? 'Admin Panel' : 'My Account'}
-                    </button>
-
-                    {/* Account Dropdown */}
-                    {!user.isAdmin && accountOpen && (
-                      <div className="auth-dropdown-menu">
-                        <button
-                          className="auth-dropdown-item"
-                          onClick={() => navigate('/account', { state: { activeTab: 'profile' } })}
-                        >
-                          My Profile
-                        </button>
-                        <button
-                          className="auth-dropdown-item"
-                          onClick={() => navigate('/account', { state: { activeTab: 'orders' } })}
-                        >
-                          My Orders
-                        </button>
-                        <button
-                          className="auth-dropdown-item"
-                          onClick={() => navigate('/account', { state: { activeTab: 'wishlist' } })}
-                        >
-                          Wishlist
-                        </button>
-                      </div>
-                    )}
-                  </div> |
+                    Admin Panel
+                  </button> |
                   <button className="strip-link" onClick={handleLogout}>
                     LOGOUT
                   </button>
                 </>
-              </>
+              ) : (
+                <>
+                  <button
+                    className="strip-link"
+                    onClick={() => navigate('/account')}
+                  >
+                    Hi, {user.name}
+                  </button> |
+                  <button className="strip-link" onClick={handleLogout}>
+                    LOGOUT
+                  </button>
+                </>
+              )
             ) : (
               <>
                 <button
@@ -123,7 +104,6 @@ const Header = () => {
                 >
                   SIGN UP
                 </button>
-
               </>
             )}
           </div>
@@ -480,10 +460,17 @@ const Header = () => {
           <div className="mobile-menu-section">
             <h4 className="mobile-section-title">Account</h4>
             {user ? (
-              <>
-                <Link to="/account" className="mobile-menu-link">My Account</Link>
-                <button onClick={handleLogout} className="mobile-menu-link logout-btn">Logout</button>
-              </>
+              user.isAdmin ? (
+                <>
+                  <Link to="/admin" className="mobile-menu-link">Admin Panel</Link>
+                  <button onClick={handleLogout} className="mobile-menu-link logout-btn">Logout</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/account" className="mobile-menu-link">My Account</Link>
+                  <button onClick={handleLogout} className="mobile-menu-link logout-btn">Logout</button>
+                </>
+              )
             ) : (
               <>
                 <Link to="/auth" className="mobile-menu-link">Log In</Link>
