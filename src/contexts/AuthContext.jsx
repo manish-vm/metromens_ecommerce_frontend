@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     const data = await authService.login({ email, password });
     setUser(data);
     localStorage.setItem('mmw_user', JSON.stringify(data));
+    localStorage.setItem('mmw_token', data.token);
     return data;
   };
 
@@ -29,6 +30,7 @@ export const AuthProvider = ({ children }) => {
     const data = await authService.register({ name, email, password, phone });
     setUser(data);
     localStorage.setItem('mmw_user', JSON.stringify(data));
+    localStorage.setItem('mmw_token', data.token);
     return data;
   };
 
@@ -37,6 +39,7 @@ export const AuthProvider = ({ children }) => {
     const data = await authService.googleLogin(idToken);
     setUser(data);
     localStorage.setItem('mmw_user', JSON.stringify(data));
+    localStorage.setItem('mmw_token', data.token);
     return data;
   };
 
@@ -50,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     const data = await authService.verifyOtp(phone, otp);
     setUser(data);
     localStorage.setItem('mmw_user', JSON.stringify(data));
+    localStorage.setItem('mmw_token', data.token);
     return data;
   };
 
@@ -58,6 +62,7 @@ export const AuthProvider = ({ children }) => {
     await authService.logout();
     setUser(null);
     localStorage.removeItem('mmw_user');
+    localStorage.removeItem('mmw_token');
   };
 
   return (
