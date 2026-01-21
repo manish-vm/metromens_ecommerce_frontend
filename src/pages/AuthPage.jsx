@@ -91,7 +91,7 @@ const AuthPage = () => {
     // A simple Google One Tap integration is possible here.
     // For brevity, assume you collect idToken from Google and call:
     // await login({ idToken }, 'google');
-    alert('Integrate Google login here using Google Identity Services.');
+    alert('This Feature will be implemented soon!');
   };
 
   return (
